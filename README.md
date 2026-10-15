@@ -48,6 +48,7 @@ chmod +x ~/.gemini/Global-Skills/install.sh && ~/.gemini/Global-Skills/install.s
 | **Flutter & Dart** | Cross-platform mobile development and diagnostics | `flutter-apply-architecture-best-practices`, `flutter-build-responsive-layout`, `dart-fix-runtime-errors` |
 | **Data Agent Kit** | Cloud data pipelines and ML workflows | `bigquery-sql`, `dbt-bigquery`, `gcp-spark`, `dataform-bigquery`, `schema-mapping` |
 | **Science & Biotech** | Biological sequence and chemical discovery | `alphafold-database-fetch-and-analyze`, `uniprot-database`, `pubmed-database`, `pdb-database` |
+| **Gravitas** *(Uday Sharma)* | Model-agnostic engineering reliability runtime | `gravitas` (scoped recon, adaptive planning, evidence-backed verification, 6 invariants) |
 | **Standalone Tools** | High-utility specialized tools | `brag` (generate launch videos), `reverse-engineer-anything` |
 
 ---
