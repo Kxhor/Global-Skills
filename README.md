@@ -1,16 +1,20 @@
 # Universal AI Global Skills Suite 🚀
 
-A comprehensive, production-grade collection of **22 plugins & suites** and **620+ battle-tested skills** configured for universal compatibility across:
+A comprehensive, production-grade collection of **12 curated suites** and **500+ battle-tested skills** configured for universal compatibility across:
 * **Claude Code** (CLI, VS Code extension, terminal)
 * **OpenCode** (CLI, VS Code extension, terminal)
 * **VS Code & Cursor** (Claude Code, OpenCode, Antigravity, Cline, Roo Code, GitHub Copilot)
 * **Google Antigravity** (IDE, Desktop 2.0 Electron, and CLI `agy`)
 
+> [!NOTE]
+> **Pure Platform-Agnostic Architecture:**
+> The default base plugins bundled with Antigravity IDE (`flutter`, `firebase`, `android-cli`, `chrome-devtools`, `gemini-api`, `data-agent-kit`, `google-antigravity-sdk`, `google_maps_platform`) are intentionally excluded from this repository. If you use Antigravity, those plugins are already provided by your IDE setup wizard. Excluding them here prevents tool collisions, missing MCP errors, and ensures seamless out-of-the-box execution for **Claude Code**, **OpenCode**, and **VS Code**.
+
 ---
 
 ## ⚡ 1-Command Global Install (For You & Your Friends)
 
-Friends can install the entire 620+ skill suite across all their IDEs and CLI tools with a single terminal command.
+Friends can install the entire 500+ skill suite across all their IDEs and CLI tools with a single terminal command:
 
 ### Windows (PowerShell)
 Open PowerShell and run:
@@ -61,7 +65,7 @@ Because Claude Code and OpenCode load these directives globally across all proje
 
 ---
 
-## 📦 Installed Frameworks & Capabilities (22 Suites · 620+ Skills)
+## 📦 Installed Frameworks & Capabilities (12 Suites · 500+ Skills)
 
 | Suite / Framework | What It Does | Key Bundled Skills |
 | :--- | :--- | :--- |
@@ -77,14 +81,6 @@ Because Claude Code and OpenCode load these directives globally across all proje
 | **Impeccable** | Design directorship, accessibility, and micro-interactions across Persuade, Operate, Read, and Experience modes. | `impeccable` (contrast audits, typography refinement, micro-interactions) |
 | **Security Review** | Automated security audits, incremental reviews on git diffs, and pre-launch security logging. | `security-review-incremental`, `security-review-prelaunch`, `security-audit-log` *(3 skills)* |
 | **Matt Pocock's Skills** | Architecture pressure-testing, requirements grilling, and type system / schema modeling. | `ask-matt`, `domain-modeling`, `codebase-design`, `grill-me`, `diagnosing-bugs`, `to-spec`, `to-tickets` *(30 skills)* |
-| **Modern Web Guidance** | Modern web platform APIs (View Transitions, `:has()`, Container Queries, Web Vitals, Popovers). | `modern-web-guidance`, `chrome-extensions` *(2 skills)* |
-| **Chrome DevTools** | MCP browser inspection, accessibility audits (WCAG), performance/LCP optimization, and heap leak debugging. | `chrome-devtools`, `a11y-debugging`, `debug-optimize-lcp`, `memory-leak-debugging` *(5 skills)* |
-| **Gemini API & Live** | Multimodal AI integrations, real-time WebSocket audio/video streaming, and Gemini Omni Flash. | `gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api` *(3 skills)* |
-| **Firebase** | Cloud database, Firestore security rules auditing, auth, and classic / App Hosting deployments. | `firebase-firestore`, `firebase-auth-basics`, `firebase-hosting-basics`, `firebase-security-rules-auditor` *(11 skills)* |
-| **Flutter & Dart** | Cross-platform mobile development, UI/Logic/Data architecture, hot-reload debugging, and widget tests. | `flutter-apply-architecture-best-practices`, `flutter-build-responsive-layout`, `dart-fix-runtime-errors`, `flutter-add-widget-test` *(23 skills)* |
-| **Data Agent Kit** | Enterprise data pipelines, BigQuery SQL optimization, dbt modeling, and Cloud Storage posture. | `bigquery-sql`, `dbt-bigquery`, `gcp-spark`, `dataform-bigquery`, `schema-mapping` *(34 skills)* |
-| **Science & Biotech** | Biological sequence and chemical discovery (AlphaFold, UniProt, PubMed, ChEMBL, NCBI). | `alphafold-database-fetch-and-analyze`, `uniprot-database`, `pubmed-database`, `pdb-database` *(40 skills)* |
-| **Gravitas** *(Uday Sharma)* | Model-agnostic engineering reliability runtime enforcing the 6 core invariants. | `gravitas` (scoped recon, adaptive planning, evidence-backed verification) |
 | **Standalone Suites** | Specialized presentation, video generation, and reverse-engineering power tools. | `pptx` (PowerPoint generation, analysis & repair), `hyperframes` suite (code-driven animation & video generation), `brag` (generate launch videos), `reverse-engineer-anything` *(15 skills)* |
 
 ---
