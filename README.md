@@ -14,12 +14,12 @@ Install all skill suites across supported IDEs and CLI tools using a single comm
 
 ### Windows (PowerShell)
 ```powershell
-git clone https://github.com/Kxhor/Global-Skills.git "$env:USERPROFILE\.gemini\Global-Skills"; powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.gemini\Global-Skills\install.ps1"
+if (Test-Path "$env:USERPROFILE\.gemini\Global-Skills") { git -C "$env:USERPROFILE\.gemini\Global-Skills" pull origin main } else { git clone https://github.com/Kxhor/Global-Skills.git "$env:USERPROFILE\.gemini\Global-Skills" }; powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.gemini\Global-Skills\install.ps1"
 ```
 
 ### macOS and Linux
 ```bash
-git clone https://github.com/Kxhor/Global-Skills.git ~/.gemini/Global-Skills && chmod +x ~/.gemini/Global-Skills/install.sh && ~/.gemini/Global-Skills/install.sh
+if [ -d "$HOME/.gemini/Global-Skills" ]; then git -C "$HOME/.gemini/Global-Skills" pull origin main; else git clone https://github.com/Kxhor/Global-Skills.git "$HOME/.gemini/Global-Skills"; fi && chmod +x "$HOME/.gemini/Global-Skills/install.sh" && "$HOME/.gemini/Global-Skills/install.sh"
 ```
 
 The installer configures directory links (NTFS junctions on Windows, symbolic links on Unix) so all skills stay updated directly from the git repository without duplicating files.
