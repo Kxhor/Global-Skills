@@ -1,4 +1,4 @@
-# Antigravity Global Skills Installer for Windows
+﻿# Antigravity, Claude Code, OpenCode & VS Code Global Skills Installer for Windows
 # Run: powershell -ExecutionPolicy Bypass -File .\install.ps1
 
 $ErrorActionPreference = "Stop"
@@ -6,101 +6,171 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $homeDir = [System.Environment]::GetFolderPath([System.Environment+SpecialFolder]::UserProfile)
 
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host "  Antigravity Global Skills Installer (Windows)" -ForegroundColor Cyan
+Write-Host "  Universal AI Global Skills Installer (Windows)" -ForegroundColor Cyan
+Write-Host "  Surfaces: Antigravity, Claude Code, OpenCode, VS Code" -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
-Write-Host "Source directory: $scriptDir"
+Write-Host "Source directory:    $scriptDir"
 Write-Host "Target user profile: $homeDir"
 
-# Target directories
-$configPluginsDir = Join-Path $homeDir ".gemini\config\plugins"
-$configSkillsDir  = Join-Path $homeDir ".gemini\config\skills"
-$cliSkillsDir     = Join-Path $homeDir ".gemini\antigravity-cli\skills"
-$agentsSkillsDir  = Join-Path $homeDir ".agents\skills"
+# Target root directories across all AI platforms
+$configPluginsDir           = Join-Path $homeDir ".gemini\config\plugins"
+$configSkillsDir            = Join-Path $homeDir ".gemini\config\skills"
+$cliSkillsDir               = Join-Path $homeDir ".gemini\antigravity-cli\skills"
+$antigravityDesktopSkillsDir= Join-Path $homeDir ".gemini\antigravity\skills"
+$agentsSkillsDir            = Join-Path $homeDir ".agents\skills"
+$claudeSkillsDir            = Join-Path $homeDir ".claude\skills"
+$opencodeConfigSkillsDir    = Join-Path $homeDir ".config\opencode\skills"
+$opencodeSkillsDir          = Join-Path $homeDir ".opencode\skills"
 
 # Create required directories
-foreach ($dir in @($configPluginsDir, $configSkillsDir, $cliSkillsDir, $agentsSkillsDir)) {
+$allDirs = @(
+    $configPluginsDir,
+    $configSkillsDir,
+    $cliSkillsDir,
+    $antigravityDesktopSkillsDir,
+    $agentsSkillsDir,
+    $claudeSkillsDir,
+    $opencodeConfigSkillsDir,
+    $opencodeSkillsDir
+)
+foreach ($dir in $allDirs) {
     if (-not (Test-Path $dir)) {
         New-Item -ItemType Directory -Path $dir -Force | Out-Null
     }
 }
 
-$pluginsInstalled = 0
-$cliSkillsLinked = 0
+function Create-SafeJunction($linkPath, $targetPath) {
+    if (-not (Test-Path $linkPath)) {
+        New-Item -ItemType Junction -Path $linkPath -Target $targetPath | Out-Null
+        return $true
+    }
+    return $false
+}
 
-# 1. Install all plugins into ~/.gemini/config/plugins and link skills into CLI / Universal
+$pluginsInstalled = 0
+$skillsLinked = 0
+$installedPlugins = @()
 $excludedDirs = @(".git", ".github", "standalone-skills")
 
+# 1. Install all plugins into ~/.gemini/config/plugins and link skills into all ecosystems
 Get-ChildItem -Path $scriptDir -Directory | Where-Object { $_.Name -notin $excludedDirs } | ForEach-Object {
     $pluginName = $_.Name
     $pluginSource = $_.FullName
     $pluginTarget = Join-Path $configPluginsDir $pluginName
+    $installedPlugins += $pluginName
 
-    # Link plugin to ~/.gemini/config/plugins
+    # Link plugin into Antigravity plugins directory
     if (-not (Test-Path $pluginTarget)) {
-        New-Item -ItemType Junction -Path $pluginTarget -Target $pluginSource | Out-Null
+        Create-SafeJunction $pluginTarget $pluginSource | Out-Null
         Write-Host " [+] Installed plugin: $pluginName" -ForegroundColor Green
         $pluginsInstalled++
     } else {
-        Write-Host " [=] Plugin already registered: $pluginName" -ForegroundColor Yellow
+        Write-Host " [=] Plugin registered: $pluginName" -ForegroundColor DarkGray
     }
 
-    # Discover skills in plugin's skills/ directory
+    # Discover and link skills in plugin's skills/ directory
     $pluginSkills = Join-Path $pluginSource "skills"
     if (Test-Path $pluginSkills) {
         Get-ChildItem -Path $pluginSkills -Directory | ForEach-Object {
             $skillName = $_.Name
             $skillSource = $_.FullName
 
-            # Link into CLI skills folder
-            $cliTarget = Join-Path $cliSkillsDir $skillName
-            if (-not (Test-Path $cliTarget)) {
-                New-Item -ItemType Junction -Path $cliTarget -Target $skillSource | Out-Null
-                $cliSkillsLinked++
-            }
-
-            # Link into universal agents folder
-            $agentsTarget = Join-Path $agentsSkillsDir $skillName
-            if (-not (Test-Path $agentsTarget)) {
-                New-Item -ItemType Junction -Path $agentsTarget -Target $skillSource | Out-Null
-            }
+            Create-SafeJunction (Join-Path $configSkillsDir $skillName) $skillSource | Out-Null
+            Create-SafeJunction (Join-Path $cliSkillsDir $skillName) $skillSource | Out-Null
+            Create-SafeJunction (Join-Path $antigravityDesktopSkillsDir $skillName) $skillSource | Out-Null
+            Create-SafeJunction (Join-Path $agentsSkillsDir $skillName) $skillSource | Out-Null
+            Create-SafeJunction (Join-Path $claudeSkillsDir $skillName) $skillSource | Out-Null
+            Create-SafeJunction (Join-Path $opencodeConfigSkillsDir $skillName) $skillSource | Out-Null
+            Create-SafeJunction (Join-Path $opencodeSkillsDir $skillName) $skillSource | Out-Null
+            $skillsLinked++
         }
     }
 }
 
-# 2. Install standalone skills into ~/.gemini/config/skills, CLI, and Universal
+# 2. Install standalone skills across all platforms
 $standaloneDir = Join-Path $scriptDir "standalone-skills"
 if (Test-Path $standaloneDir) {
     Get-ChildItem -Path $standaloneDir -Directory | ForEach-Object {
         $skillName = $_.Name
         $skillSource = $_.FullName
 
-        # IDE standalone root
-        $configTarget = Join-Path $configSkillsDir $skillName
-        if (-not (Test-Path $configTarget)) {
-            New-Item -ItemType Junction -Path $configTarget -Target $skillSource | Out-Null
-            Write-Host " [+] Installed standalone skill: $skillName" -ForegroundColor Green
-        }
+        Create-SafeJunction (Join-Path $configSkillsDir $skillName) $skillSource | Out-Null
+        Create-SafeJunction (Join-Path $cliSkillsDir $skillName) $skillSource | Out-Null
+        Create-SafeJunction (Join-Path $antigravityDesktopSkillsDir $skillName) $skillSource | Out-Null
+        Create-SafeJunction (Join-Path $agentsSkillsDir $skillName) $skillSource | Out-Null
+        Create-SafeJunction (Join-Path $claudeSkillsDir $skillName) $skillSource | Out-Null
+        Create-SafeJunction (Join-Path $opencodeConfigSkillsDir $skillName) $skillSource | Out-Null
+        Create-SafeJunction (Join-Path $opencodeSkillsDir $skillName) $skillSource | Out-Null
+        Write-Host " [+] Installed standalone skill: $skillName" -ForegroundColor Green
+        $skillsLinked++
+    }
+}
 
-        # CLI root
-        $cliTarget = Join-Path $cliSkillsDir $skillName
-        if (-not (Test-Path $cliTarget)) {
-            New-Item -ItemType Junction -Path $cliTarget -Target $skillSource | Out-Null
-            $cliSkillsLinked++
-        }
+# 3. Create high-utility alias junctions
+$aliases = @{
+    "addy-tdd"                      = Join-Path $scriptDir "agent-skills\skills\test-driven-development"
+    "agent-tdd"                     = Join-Path $scriptDir "agent-skills\skills\test-driven-development"
+    "test-driven-development-agent" = Join-Path $scriptDir "agent-skills\skills\test-driven-development"
+    "ecc-design-system"             = Join-Path $scriptDir "ecc\skills\design-system"
+}
+foreach ($alias in $aliases.Keys) {
+    $target = $aliases[$alias]
+    if (Test-Path $target) {
+        Create-SafeJunction (Join-Path $configSkillsDir $alias) $target | Out-Null
+        Create-SafeJunction (Join-Path $cliSkillsDir $alias) $target | Out-Null
+        Create-SafeJunction (Join-Path $agentsSkillsDir $alias) $target | Out-Null
+        Create-SafeJunction (Join-Path $claudeSkillsDir $alias) $target | Out-Null
+    }
+}
 
-        # Universal root
-        $agentsTarget = Join-Path $agentsSkillsDir $skillName
-        if (-not (Test-Path $agentsTarget)) {
-            New-Item -ItemType Junction -Path $agentsTarget -Target $skillSource | Out-Null
+# 4. Register and enable all plugins in Antigravity config.json
+$configJsonPath = Join-Path $homeDir ".gemini\config\config.json"
+if (Test-Path $configJsonPath) {
+    try {
+        $config = Get-Content $configJsonPath -Raw | ConvertFrom-Json
+        if (-not $config.plugins) {
+            $config | Add-Member -MemberType NoteProperty -Name "plugins" -Value ([PSCustomObject]@{})
         }
+        foreach ($p in $installedPlugins) {
+            if (-not $config.plugins.$p) {
+                $config.plugins | Add-Member -MemberType NoteProperty -Name $p -Value ([PSCustomObject]@{ enabled = $true })
+            } else {
+                $config.plugins.$p.enabled = $true
+            }
+        }
+        $config | ConvertTo-Json -Depth 10 | Set-Content $configJsonPath -Encoding UTF8
+        Write-Host " [✔] Registered all plugins in ~/.gemini/config/config.json" -ForegroundColor Green
+    } catch {
+        Write-Host " [!] Notice: Could not automatically update config.json: $_" -ForegroundColor DarkGray
+    }
+}
+
+# 5. Install Universal Proactive Skill Directive in ~/.claude/CLAUDE.md and ~/.agents/AGENTS.md
+$sourceClaudeMd = Join-Path $scriptDir "CLAUDE.md"
+$sourceAgentsMd = Join-Path $scriptDir "AGENTS.md"
+
+if (Test-Path $sourceClaudeMd) {
+    $targetClaudeMd = Join-Path $homeDir ".claude\CLAUDE.md"
+    if (-not (Test-Path $targetClaudeMd)) {
+        Copy-Item $sourceClaudeMd $targetClaudeMd -Force
+        Write-Host " [✔] Installed universal proactive directive in ~/.claude/CLAUDE.md" -ForegroundColor Green
+    }
+}
+if (Test-Path $sourceAgentsMd) {
+    $targetAgentsMd = Join-Path $homeDir ".agents\AGENTS.md"
+    if (-not (Test-Path $targetAgentsMd)) {
+        Copy-Item $sourceAgentsMd $targetAgentsMd -Force
+        Write-Host " [✔] Installed universal proactive directive in ~/.agents/AGENTS.md" -ForegroundColor Green
     }
 }
 
 Write-Host "`n----------------------------------------------------------" -ForegroundColor Cyan
-Write-Host " Installation Complete!" -ForegroundColor Green
-Write-Host " Plugins in IDE/2.0:  $((Get-ChildItem -Path $configPluginsDir -Directory).Count)" -ForegroundColor White
-Write-Host " Standalone Skills:   $((Get-ChildItem -Path $configSkillsDir -Directory).Count)" -ForegroundColor White
-Write-Host " Total Skills in CLI: $((Get-ChildItem -Path $cliSkillsDir -Directory).Count)" -ForegroundColor White
-Write-Host " Universal Skills:    $((Get-ChildItem -Path $agentsSkillsDir -Directory).Count)" -ForegroundColor White
+Write-Host " Global Installation Complete!" -ForegroundColor Green
+Write-Host " Total Plugins Installed:    $((Get-ChildItem -Path $configPluginsDir -Directory).Count)" -ForegroundColor White
+Write-Host " Antigravity IDE Skills:     $((Get-ChildItem -Path $configSkillsDir -Directory).Count)" -ForegroundColor White
+Write-Host " Antigravity CLI Skills:     $((Get-ChildItem -Path $cliSkillsDir -Directory).Count)" -ForegroundColor White
+Write-Host " Universal (.agents) Skills: $((Get-ChildItem -Path $agentsSkillsDir -Directory).Count)" -ForegroundColor White
+Write-Host " Claude Code Skills:         $((Get-ChildItem -Path $claudeSkillsDir -Directory).Count)" -ForegroundColor White
+Write-Host " OpenCode Skills:            $((Get-ChildItem -Path $opencodeConfigSkillsDir -Directory).Count)" -ForegroundColor White
 Write-Host "----------------------------------------------------------" -ForegroundColor Cyan
-Write-Host "Restart Antigravity IDE / 2.0 or launch 'agy' CLI to use them immediately!" -ForegroundColor Yellow
+Write-Host "Restart your IDE (Antigravity / VS Code / Cursor) or CLI (Claude Code / OpenCode / agy) to begin using them immediately!" -ForegroundColor Yellow

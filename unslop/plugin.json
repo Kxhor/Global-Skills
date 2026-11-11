@@ -1,0 +1,21 @@
+{
+  "name": "unslop",
+  "version": "1.0.0",
+  "description": "Turns vibecoded, AI-looking UI into a designed interface with its own character. Finds a direction from the product itself, then fixes spacing, color, icons, copy, type, layout, details, visuals and motion in that order.",
+  "author": {
+    "name": "Damir Sokolovsky",
+    "url": "https://x.com/heydamir"
+  },
+  "homepage": "https://heydamir.design/unslop",
+  "repository": "https://github.com/heydamir/unslop.git",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "ui",
+    "ux",
+    "design",
+    "unslop",
+    "frontend",
+    "redesign",
+    "anti-slop"
+  ]
+}

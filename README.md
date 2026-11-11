@@ -1,78 +1,111 @@
-# Antigravity Global Skills Suite 🚀
+# Universal AI Global Skills Suite 🚀
 
-A comprehensive collection of **18 production suites** and **265+ battle-tested skills** configured for Google Antigravity across all three surfaces:
-* **Antigravity IDE**
-* **Antigravity 2.0 (Desktop Electron)**
-* **Antigravity CLI (`agy`)**
+A comprehensive, production-grade collection of **22 plugins & suites** and **620+ battle-tested skills** configured for universal compatibility across:
+* **Claude Code** (CLI, VS Code extension, terminal)
+* **OpenCode** (CLI, VS Code extension, terminal)
+* **VS Code & Cursor** (Claude Code, OpenCode, Antigravity, Cline, Roo Code, GitHub Copilot)
+* **Google Antigravity** (IDE, Desktop 2.0 Electron, and CLI `agy`)
 
 ---
 
-## ⚡ Quick Start: 1-Command Global Install
+## ⚡ 1-Command Global Install (For You & Your Friends)
 
-Clone this repository and run the automated installer for your operating system.
+Friends can install the entire 620+ skill suite across all their IDEs and CLI tools with a single terminal command.
 
 ### Windows (PowerShell)
 Open PowerShell and run:
 ```powershell
-git clone https://github.com/Kxhor/Global-Skills.git "$env:USERPROFILE\.gemini\Global-Skills"
-powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.gemini\Global-Skills\install.ps1"
+git clone https://github.com/Kxhor/Global-Skills.git "$env:USERPROFILE\.gemini\Global-Skills"; powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\.gemini\Global-Skills\install.ps1"
 ```
 
 ### macOS / Linux (Terminal)
 Open Terminal and run:
 ```bash
-git clone https://github.com/Kxhor/Global-Skills.git ~/.gemini/Global-Skills
-chmod +x ~/.gemini/Global-Skills/install.sh && ~/.gemini/Global-Skills/install.sh
+git clone https://github.com/Kxhor/Global-Skills.git ~/.gemini/Global-Skills && chmod +x ~/.gemini/Global-Skills/install.sh && ~/.gemini/Global-Skills/install.sh
 ```
 
-> **Note:** The installer creates lightweight directory links (NTFS Junctions on Windows, symlinks on Unix). It takes zero extra disk space and updates automatically whenever you `git pull`.
+> **Zero Extra Disk Space:** The installer creates lightweight directory links (native NTFS Junctions on Windows, symlinks on Unix). All skills stay synchronized directly with your git checkout!
 
 ---
 
-## 📦 Included Suites & Capabilities
+## 🤖 Do These Skills Work Automatically Without Calling Them Every Time?
 
-| Suite / Framework | What It Does | Key Workflows & Skills |
+### **YES — 100% Autonomous (No Manual Slash Commands Required)**
+
+You and your friends do **not** need to memorize commands like `/tdd`, `/unslop`, or `/spec` or call skills manually every time. They trigger autonomously through three built-in mechanisms:
+
+### 1. Semantic Progressive Disclosure
+Every skill includes YAML frontmatter (`name` and `description`). At the start of a conversation, AI agents (**Claude Code**, **OpenCode**, and **Antigravity**) ingest the catalog of skill descriptions into their system context:
+* **"Clean up this messy UI / make it look less AI"** ➔ Agent automatically invokes `unslop` (9-pass craft pass) and `design-taste-frontend`.
+* **"Write a new feature for login"** ➔ Agent automatically invokes `spec-driven-development` (`/spec`) and `brainstorming`.
+* **"Why is my test or API endpoint failing?"** ➔ Agent automatically invokes `systematic-debugging` and `diagnosing-bugs`.
+* **"Implement this in Django / FastAPI / Go / Rust / K8s"** ➔ Agent automatically invokes ECC deep technical patterns (`django-patterns`, `fastapi-patterns`, `golang-patterns`, `rust-patterns`, `kubernetes-patterns`).
+* **"Clone this website or reverse-engineer this UI"** ➔ Agent automatically invokes `replica-recon` and `replica-architect`.
+* **"Prepare a PR / review this branch"** ➔ Agent automatically invokes `gstack-review`, `gstack-qa`, `shipping-and-launch`, or `security-review-incremental`.
+
+### 2. Universal Proactive Directive (`CLAUDE.md` & `AGENTS.md`)
+The installer automatically deploys global rule directives to `~/.claude/CLAUDE.md` and `~/.agents/AGENTS.md`:
+> *"Whenever the user's task matches a skill's domain, you MUST inspect and execute the corresponding `SKILL.md` FIRST before taking action or writing speculative code. Do not wait for the user to type a slash command."*
+
+Because Claude Code and OpenCode load these directives globally across all projects, the agent is strictly prohibited from taking speculative, unguided actions without invoking the relevant runbook first.
+
+### 3. How It Works in Your Desired IDEs & CLIs
+
+| Platform / IDE | How It Runs | Automatic Activation Method |
 | :--- | :--- | :--- |
-| **Superpowers** | Process enforcement: TDD, debugging, planning | `brainstorming`, `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `writing-plans` |
-| **gstack** *(Garry Tan)* | Full-stack engineering, QA, and release management (58 skills) | `gstack-review`, `gstack-qa`, `gstack-ship`, `gstack-browse`, `gstack-autoplan`, `gstack-office-hours`, `gstack-careful` |
-| **UI/UX Pro Max** | Design intelligence with local datasets (79 styles, 192 palettes) | `ui-ux-pro-max`, `ui-styling` (shadcn/Tailwind), `design-system`, `brand`, `banner-design`, `slides` |
-| **Taste Skill** | Anti-slop frontend engineering and aesthetic calibration | `design-taste-frontend`, `minimalist-ui`, `industrial-brutalist-ui`, `high-end-visual-design`, `brandkit` |
-| **Ponytail** | Complexity filter and minimalist code enforcement | `ponytail` (7-rung minimalist ladder), `ponytail-review`, `ponytail-audit`, `ponytail-debt` |
-| **Impeccable** | Design directorship, accessibility, and micro-interactions | `impeccable` (Persuade, Operate, Read, and Experience modes, WCAG contrast audits) |
-| **Security Review** | Automated security audits and defense-in-depth | `security-review-incremental`, `security-review-prelaunch`, `security-audit-log` |
-| **Matt Pocock's Skills** | Architecture pressure-testing and schema modeling | `ask-matt`, `domain-modeling`, `codebase-design`, `grill-me`, `diagnosing-bugs`, `to-spec` |
-| **Modern Web Guidance** | Modern web platform APIs and standards | `modern-web-guidance` (View Transitions, `:has()`, Container Queries), `chrome-extensions` |
-| **Chrome DevTools** | MCP browser inspection and web performance | `chrome-devtools`, `a11y-debugging`, `debug-optimize-lcp`, `memory-leak-debugging` |
-| **Gemini API & Live** | Multimodal AI integrations and real-time streaming | `gemini-api-dev`, `gemini-live-api-dev` (WebSockets), `gemini-omni-flash-api` |
-| **Firebase** | Cloud database, security rules, and auth | `firebase-firestore`, `firebase-auth-basics`, `firebase-security-rules-auditor`, `firebase-hosting-basics` |
-| **Flutter & Dart** | Cross-platform mobile development and diagnostics | `flutter-apply-architecture-best-practices`, `flutter-build-responsive-layout`, `dart-fix-runtime-errors` |
-| **Data Agent Kit** | Cloud data pipelines and ML workflows | `bigquery-sql`, `dbt-bigquery`, `gcp-spark`, `dataform-bigquery`, `schema-mapping` |
-| **Science & Biotech** | Biological sequence and chemical discovery | `alphafold-database-fetch-and-analyze`, `uniprot-database`, `pubmed-database`, `pdb-database` |
-| **Gravitas** *(Uday Sharma)* | Model-agnostic engineering reliability runtime | `gravitas` (scoped recon, adaptive planning, evidence-backed verification, 6 invariants) |
-| **Standalone Tools** | High-utility specialized tools | `brag` (generate launch videos), `reverse-engineer-anything` |
+| **Claude Code (CLI & Terminal)** | Native `~/.claude/skills/` | Automatic via frontmatter index + `~/.claude/CLAUDE.md` |
+| **OpenCode (CLI & Terminal)** | Native `~/.agents/skills/` & `~/.config/opencode/skills/` | Automatic via frontmatter index + `~/.agents/AGENTS.md` |
+| **VS Code (Claude Code / OpenCode)** | Integrated terminal & extensions | Fully automatic; reads user-profile `~/.claude` and `~/.agents` |
+| **Cursor / Windsurf** | Agent mode | Reads `~/.agents/skills/` and global rules automatically |
+| **Antigravity (IDE, Desktop, `agy`)** | Native plugin & skill registry | Progressive disclosure + global invariants in `config.json` |
 
 ---
 
-## 🧠 How It Works
+## 📦 Installed Frameworks & Capabilities (22 Suites · 620+ Skills)
 
-### 1. Automatic Intent Activation (No Prompts Needed)
-Antigravity operates on **Progressive Disclosure**. The agent continuously evaluates your intent against all registered skill descriptions:
-* Ask to fix a mysterious error ➔ automatically activates `systematic-debugging` and `diagnosing-bugs`.
-* Ask to design a modern interface ➔ automatically activates `ui-ux-pro-max`, `design-taste-frontend`, and `impeccable`.
-* Ask to review a PR or ship changes ➔ automatically activates `gstack-review`, `gstack-qa`, and `security-review-incremental`.
+| Suite / Framework | What It Does | Key Bundled Skills |
+| :--- | :--- | :--- |
+| **Agent Skills** *(Addy Osmani)* | Engineering lifecycle: Specs before code, atomic plans, strict test gates, automated reviews, safe shipping. | `spec-driven-development`, `planning-and-task-breakdown`, `incremental-implementation`, `test-driven-development`, `code-review-and-quality`, `shipping-and-launch`, `code-simplification`, `doubt-driven-development`, `performance-optimization` *(25 skills)* |
+| **ECC (Everything Claude Code / Agent Harness OS)** *(Affaan Mustafa)* | Massive library covering 20+ stacks (FastAPI, Django, Rails, Spring Boot, Go, Rust, Kotlin, Swift, Vue, React, K8s, etc.), eval-first loops, token-budget optimization, and multi-agent coordination. | `agentic-engineering`, `continuous-learning-v2`, `eval-harness`, `ecc-guide`, `api-design`, `backend-patterns`, `frontend-patterns`, `token-budget-advisor`, `docker-patterns`, `kubernetes-patterns` *(314 skills)* |
+| **Unslop** *(Damir Sokolovsky)* | Anti-slop redesign & craft engine: Turns vibecoded, AI-looking UI into a designed interface with authentic character via 9 redline passes. | `unslop` (`/unslop`, `/unslop <url>`, `/unslop story`) |
+| **Replica Skill** *(Jake Schincariol)* | Clean-room app replication & commercialization: Rebuild any web/mobile app from URLs or screenshots and engineer competitor pain points into features. | `replica-recon`, `replica-architect`, `replica-design`, `replica-backend`, `replica-build`, `replica-diff`, `replica-test`, `replica-entrepreneur`, `replica-brand`, `replica-launch`, `replica-deploy` *(11 skills)* |
+| **Superpowers** | Disciplined problem-solving: Enforces brainstorming before planning, TDD before coding, systematic debugging on errors, and verification before completion. | `using-superpowers`, `brainstorming`, `systematic-debugging`, `test-driven-development`, `writing-plans`, `executing-plans`, `subagent-driven-development`, `verification-before-completion` *(14 skills)* |
+| **gstack** *(Garry Tan)* | Full-stack engineering, QA, and release management: Atomic shipping, pre-landing PR reviews, headless browser QA testing, and CEO/Eng architectural reviews. | `gstack`, `gstack-review`, `gstack-qa`, `gstack-ship`, `gstack-browse`, `gstack-autoplan`, `gstack-office-hours`, `gstack-careful`, `gstack-investigate` *(58 skills)* |
+| **UI/UX Pro Max** | Design intelligence engine with searchable local dataset: 79 styles, 192 product palettes, 74 font pairings, 119 UX guidelines, 105 icons, 17 GSAP motion presets, 25 chart types. | `ui-ux-pro-max`, `ui-styling` (shadcn/Tailwind), `design-system`, `brand`, `banner-design`, `slides` *(7 skills)* |
+| **Taste Skill** | Anti-slop frontend engineering: Establishes a one-line Design Read, calibrates 3 dials (`VARIANCE`, `MOTION`, `DENSITY`), and bans generic purple glows and low-contrast palettes. | `design-taste-frontend`, `minimalist-ui`, `industrial-brutalist-ui`, `high-end-visual-design`, `redesign-existing-projects`, `brandkit`, `stitch-design-taste` *(13 skills)* |
+| **Ponytail** | Pragmatic complexity filter: Enforces the 7-rung minimalist ladder (YAGNI, standard library first, native platform before new dependencies). | `ponytail`, `ponytail-review`, `ponytail-audit`, `ponytail-debt`, `ponytail-gain` *(6 skills)* |
+| **Impeccable** | Design directorship, accessibility, and micro-interactions across Persuade, Operate, Read, and Experience modes. | `impeccable` (contrast audits, typography refinement, micro-interactions) |
+| **Security Review** | Automated security audits, incremental reviews on git diffs, and pre-launch security logging. | `security-review-incremental`, `security-review-prelaunch`, `security-audit-log` *(3 skills)* |
+| **Matt Pocock's Skills** | Architecture pressure-testing, requirements grilling, and type system / schema modeling. | `ask-matt`, `domain-modeling`, `codebase-design`, `grill-me`, `diagnosing-bugs`, `to-spec`, `to-tickets` *(30 skills)* |
+| **Modern Web Guidance** | Modern web platform APIs (View Transitions, `:has()`, Container Queries, Web Vitals, Popovers). | `modern-web-guidance`, `chrome-extensions` *(2 skills)* |
+| **Chrome DevTools** | MCP browser inspection, accessibility audits (WCAG), performance/LCP optimization, and heap leak debugging. | `chrome-devtools`, `a11y-debugging`, `debug-optimize-lcp`, `memory-leak-debugging` *(5 skills)* |
+| **Gemini API & Live** | Multimodal AI integrations, real-time WebSocket audio/video streaming, and Gemini Omni Flash. | `gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api` *(3 skills)* |
+| **Firebase** | Cloud database, Firestore security rules auditing, auth, and classic / App Hosting deployments. | `firebase-firestore`, `firebase-auth-basics`, `firebase-hosting-basics`, `firebase-security-rules-auditor` *(11 skills)* |
+| **Flutter & Dart** | Cross-platform mobile development, UI/Logic/Data architecture, hot-reload debugging, and widget tests. | `flutter-apply-architecture-best-practices`, `flutter-build-responsive-layout`, `dart-fix-runtime-errors`, `flutter-add-widget-test` *(23 skills)* |
+| **Data Agent Kit** | Enterprise data pipelines, BigQuery SQL optimization, dbt modeling, and Cloud Storage posture. | `bigquery-sql`, `dbt-bigquery`, `gcp-spark`, `dataform-bigquery`, `schema-mapping` *(34 skills)* |
+| **Science & Biotech** | Biological sequence and chemical discovery (AlphaFold, UniProt, PubMed, ChEMBL, NCBI). | `alphafold-database-fetch-and-analyze`, `uniprot-database`, `pubmed-database`, `pdb-database` *(40 skills)* |
+| **Gravitas** *(Uday Sharma)* | Model-agnostic engineering reliability runtime enforcing the 6 core invariants. | `gravitas` (scoped recon, adaptive planning, evidence-backed verification) |
+| **Standalone Suites** | Specialized presentation, video generation, and reverse-engineering power tools. | `pptx` (PowerPoint generation, analysis & repair), `hyperframes` suite (code-driven animation & video generation), `brag` (generate launch videos), `reverse-engineer-anything` *(15 skills)* |
 
-### 2. Manual Slash Commands in CLI (`agy`)
-In the Antigravity CLI terminal, all skills are registered as first-class slash commands:
-* **QA & Ship:** `/gstack-review`, `/gstack-qa`, `/gstack-ship`, `/gstack-browse`, `/gstack-autoplan`
-* **Design:** `/ui-ux-pro-max`, `/ui-styling`, `/design-system`, `/brand`, `/banner-design`, `/slides`
-* **Engineering Process:** `/brainstorming`, `/test-driven-development`, `/systematic-debugging`, `/ponytail-review`
-* **Utilities:** `/brag`, `/grill-me`, `/ask-matt`
+---
+
+## ⚡ Optional Manual Slash Commands
+
+While automatic activation is the primary mode of operation, you can still trigger or steer any workflow manually via slash commands in your CLI or chat:
+
+* **Clean Vibecoded UI:** `/unslop`, `/unslop <url>`
+* **Lifecycle & Specs:** `/spec`, `/plan`, `/build`, `/test`, `/review`, `/ship`, `/code-simplify`, `/webperf`
+* **App Replication:** `/replica-recon`, `/replica-architect`, `/replica-design`, `/replica-backend`, `/replica-diff`
+* **Release & QA:** `/gstack-review`, `/gstack-qa`, `/gstack-ship`, `/gstack-browse`, `/gstack-autoplan`
+* **Design & Styling:** `/ui-ux-pro-max`, `/ui-styling`, `/design-system`, `/brand`, `/banner-design`, `/slides`, `/design-taste-frontend`
+* **Engineering Process:** `/brainstorming`, `/test-driven-development`, `/systematic-debugging`, `/verification-before-completion`, `/ponytail-review`
+* **Utilities:** `/pptx`, `/brag`, `/grill-me`, `/ask-matt`, `/reverse-engineer-anything`
 
 ---
 
 ## 🔄 Keeping Up to Date
-To get the latest skills and upstream updates, simply pull the latest changes:
+
+Because the installation scripts link to your local clone, updates take effect immediately without re-running any installer:
 ```bash
 git pull origin main
 ```
-Because the installer links to your checkout directory, all updates apply immediately without re-running the installation script.
